@@ -34,7 +34,7 @@ const Header = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
           <div className="flex items-center space-x-4">
             <img 
-              src="https://nsda.gov.bd/assets/images/logo.png" 
+              src="https://nsda.gov.bd/themes/responsive_npf/img/logo/logo.png" 
               alt="NSDA Logo" 
               className="h-12 w-12 sm:h-16 sm:w-16"
             />
