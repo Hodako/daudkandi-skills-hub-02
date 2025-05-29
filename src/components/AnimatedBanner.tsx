@@ -57,8 +57,7 @@ const AnimatedBanner = () => {
                 </Button>
               </div>
 
-  <div className="flex items-center space-x-6 text-sm" style = "color:black"
-    >
+  <div className="flex items-center space-x-6 text-sm" style = "color:black">
                 <div className="flex items-center">
                   <i className="fas fa-users mr-2 text-yellow-300"></i>
                   <span>25 Seats Available</span>
