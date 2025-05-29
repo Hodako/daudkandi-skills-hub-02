@@ -60,7 +60,7 @@ const AnimatedBanner = () => {
               <div className="flex items-center space-x-6 text-sm">
                 <div className="flex items-center">
                   <i className="fas fa-users mr-2 text-yellow-300"></i>
-                  <span>25 Seats Available</span>
+                  <span style ="color:black">25 Seats Available</span>
                 </div>
                 <div className="flex items-center">
                   <i className="fas fa-clock mr-2 text-yellow-300"></i>
