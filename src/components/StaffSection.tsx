@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -18,7 +17,7 @@ const StaffSection = () => {
       experience: "Expert in Adobe Photoshop and Illustrator with industry experience",
       image: "https://upload.wikimedia.org/wikipedia/commons/7/76/Daudkandi_TTC_Subarna_Jerin_Khan.png"
     },
-    
+    {
       name: "Forhad Mia",
       position: "Support Staff",
       role: "Administrative & Technical Support",
