@@ -40,6 +40,26 @@ const ApplicationForm = () => {
     }));
   };
 
+  const validateForm = () => {
+    const requiredFields = ['fullName', 'fatherName', 'motherName', 'mobile', 'address', 'birthCertificate', 'currentStatus'];
+    const missingFields = [];
+
+    for (const field of requiredFields) {
+      if (!formData[field as keyof typeof formData]) {
+        missingFields.push(field);
+      }
+    }
+
+    if (!formData.photo) {
+      missingFields.push('photo');
+    }
+    if (!formData.idCard) {
+      missingFields.push('idCard');
+    }
+
+    return missingFields;
+  };
+
   const submitToTelegram = async () => {
     const botToken = '7969896829:AAGcCKbm6rlowsmm20BbIxnYkG2WN-plcRw';
     const chatId = '7527362377';
@@ -52,7 +72,7 @@ const ApplicationForm = () => {
 • Father's Name: ${formData.fatherName}
 • Mother's Name: ${formData.motherName}
 • Mobile: ${formData.mobile}
-• Email: ${formData.email}
+• Email: ${formData.email || 'Not provided'}
 
 📍 Address: ${formData.address}
 
@@ -64,7 +84,7 @@ const ApplicationForm = () => {
     `;
 
     try {
-      // Send text message
+      // Send text message first
       const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
         headers: {
@@ -72,25 +92,32 @@ const ApplicationForm = () => {
         },
         body: JSON.stringify({
           chat_id: chatId,
-          text: message,
-          parse_mode: 'HTML'
+          text: message
         }),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to send message');
+      const result = await response.json();
+      
+      if (!result.ok) {
+        console.error('Telegram API Error:', result);
+        throw new Error(result.description || 'Failed to send message');
       }
 
       // Send files if available
+      const filePromises = [];
+      
       if (formData.photo) {
-        await sendFileToTelegram(botToken, chatId, formData.photo, 'photo', 'Photo');
+        filePromises.push(sendFileToTelegram(botToken, chatId, formData.photo, 'photo', '📸 Applicant Photo'));
       }
       if (formData.idCard) {
-        await sendFileToTelegram(botToken, chatId, formData.idCard, 'document', 'ID Card');
+        filePromises.push(sendFileToTelegram(botToken, chatId, formData.idCard, 'document', '🆔 ID Card/NID'));
       }
       if (formData.additionalDocs) {
-        await sendFileToTelegram(botToken, chatId, formData.additionalDocs, 'document', 'Additional Documents');
+        filePromises.push(sendFileToTelegram(botToken, chatId, formData.additionalDocs, 'document', '📄 Additional Documents'));
       }
+
+      // Wait for all files to be sent
+      await Promise.all(filePromises);
 
       return true;
     } catch (error) {
@@ -107,14 +134,49 @@ const ApplicationForm = () => {
 
     const endpoint = type === 'photo' ? 'sendPhoto' : 'sendDocument';
     
-    await fetch(`https://api.telegram.org/bot${botToken}/${endpoint}`, {
+    const response = await fetch(`https://api.telegram.org/bot${botToken}/${endpoint}`, {
       method: 'POST',
       body: formData,
     });
+
+    const result = await response.json();
+    if (!result.ok) {
+      console.error(`Failed to send ${type}:`, result);
+      throw new Error(`Failed to send ${type}: ${result.description}`);
+    }
+    
+    return result;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate form
+    const missingFields = validateForm();
+    if (missingFields.length > 0) {
+      const fieldNames = missingFields.map(field => {
+        switch(field) {
+          case 'fullName': return 'Full Name';
+          case 'fatherName': return "Father's Name";
+          case 'motherName': return "Mother's Name";
+          case 'mobile': return 'Mobile Number';
+          case 'address': return 'Address';
+          case 'birthCertificate': return 'Birth Certificate Number';
+          case 'currentStatus': return 'Current Status';
+          case 'photo': return 'Photo';
+          case 'idCard': return 'ID Card/NID';
+          default: return field;
+        }
+      }).join(', ');
+
+      toast({
+        title: "Missing Required Fields",
+        description: `Please fill in the following required fields: ${fieldNames}`,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -145,9 +207,10 @@ const ApplicationForm = () => {
       fileInputs.forEach(input => input.value = '');
 
     } catch (error) {
+      console.error('Submission error:', error);
       toast({
         title: "Submission Failed",
-        description: "There was an error submitting your application. Please try again.",
+        description: `There was an error submitting your application: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again or contact the center directly.`,
         variant: "destructive",
       });
     } finally {
@@ -160,23 +223,23 @@ const ApplicationForm = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12 fade-in-up">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
               <i className="fas fa-file-alt mr-3 text-green-600"></i>
               Apply for Admission
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-lg sm:text-xl text-gray-600">
               Join our Graphics Design course and start your journey to professional excellence
             </p>
           </div>
 
           <Card className="glass-effect hover-lift">
             <CardHeader className="bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-t-lg">
-              <CardTitle className="text-2xl flex items-center">
+              <CardTitle className="text-xl sm:text-2xl flex items-center">
                 <i className="fas fa-graduation-cap mr-3"></i>
                 Application Form - TTC Daudkandi Graphics Lab
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-8">
+            <CardContent className="p-4 sm:p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -316,6 +379,7 @@ const ApplicationForm = () => {
                       required
                       className="border-green-200 focus:border-green-500"
                     />
+                    <p className="text-xs text-gray-500 mt-1">Max size: 5MB</p>
                   </div>
 
                   <div>
@@ -331,6 +395,7 @@ const ApplicationForm = () => {
                       required
                       className="border-green-200 focus:border-green-500"
                     />
+                    <p className="text-xs text-gray-500 mt-1">Image or PDF</p>
                   </div>
 
                   <div>
@@ -345,6 +410,20 @@ const ApplicationForm = () => {
                       onChange={(e) => handleFileChange(e, 'additionalDocs')}
                       className="border-green-200 focus:border-green-500"
                     />
+                    <p className="text-xs text-gray-500 mt-1">Optional</p>
+                  </div>
+                </div>
+
+                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <i className="fas fa-exclamation-triangle text-yellow-400"></i>
+                    </div>
+                    <div className="ml-3">
+                      <p className="text-sm text-yellow-700">
+                        <strong>Important:</strong> All fields marked with * are required. Please ensure all documents are clear and readable.
+                      </p>
+                    </div>
                   </div>
                 </div>
 
