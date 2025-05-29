@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-type Theme = 'light' | 'dark' | 'system';
+type Theme = 'system';
 
 interface ThemeContextType {
   theme: Theme;
@@ -20,11 +20,7 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem('theme') as Theme;
-    return stored || 'system';
-  });
-
+  const [theme] = useState<Theme>('system');
   const [actualTheme, setActualTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
@@ -34,28 +30,24 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     };
 
-    const applyTheme = (newTheme: Theme) => {
-      const resolvedTheme = newTheme === 'system' ? getSystemTheme() : newTheme;
+    const applyTheme = () => {
+      const resolvedTheme = getSystemTheme();
       setActualTheme(resolvedTheme);
       
       root.classList.remove('light', 'dark');
       root.classList.add(resolvedTheme);
-      
-      localStorage.setItem('theme', newTheme);
     };
 
-    applyTheme(theme);
+    applyTheme();
 
-    if (theme === 'system') {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      const handleChange = () => applyTheme('system');
-      mediaQuery.addEventListener('change', handleChange);
-      return () => mediaQuery.removeEventListener('change', handleChange);
-    }
-  }, [theme]);
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => applyTheme();
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, actualTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme: () => {}, actualTheme }}>
       {children}
     </ThemeContext.Provider>
   );

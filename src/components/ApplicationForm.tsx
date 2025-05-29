@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
 
 const ApplicationForm = () => {
@@ -23,6 +24,8 @@ const ApplicationForm = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadStatus, setUploadStatus] = useState('');
+  const [canSubmit, setCanSubmit] = useState(false);
   const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -34,6 +37,34 @@ const ApplicationForm = () => {
     const { name, files } = e.target;
     if (files && files[0]) {
       setFormData(prev => ({ ...prev, [name]: files[0] }));
+      simulateImageUpload(name, files[0]);
+    }
+  };
+
+  const simulateImageUpload = (fieldName: string, file: File) => {
+    setUploadStatus(`Uploading ${fieldName}...`);
+    setUploadProgress(0);
+    
+    const interval = setInterval(() => {
+      setUploadProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setUploadStatus(`${fieldName} uploaded successfully!`);
+          checkAllImagesUploaded();
+          return 100;
+        }
+        return prev + 10;
+      });
+    }, 100);
+  };
+
+  const checkAllImagesUploaded = () => {
+    const requiredFiles = ['photo', 'nidCard', 'birthCertificate', 'educationalCertificate'];
+    const uploadedFiles = requiredFiles.filter(field => formData[field as keyof typeof formData]);
+    
+    if (uploadedFiles.length === requiredFiles.length) {
+      setCanSubmit(true);
+      setUploadStatus('All images uploaded successfully! You can now submit your application.');
     }
   };
 
@@ -62,46 +93,22 @@ const ApplicationForm = () => {
     return true;
   };
 
-  const convertFileToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = error => reject(error);
-    });
-  };
-
-  const simulateUploadProgress = () => {
-    setUploadProgress(0);
-    const interval = setInterval(() => {
-      setUploadProgress(prev => {
-        if (prev >= 90) {
-          clearInterval(interval);
-          return 90;
-        }
-        return prev + 10;
-      });
-    }, 200);
-    return interval;
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateForm()) return;
+    if (!validateForm() || !canSubmit) {
+      toast({
+        title: "Cannot Submit",
+        description: "Please upload all required images before submitting.",
+        variant: "destructive",
+      });
+      return;
+    }
     
     setIsSubmitting(true);
-    const progressInterval = simulateUploadProgress();
+    setUploadStatus('Submitting application...');
     
     try {
-      // Convert files to base64
-      const photoBase64 = formData.photo ? await convertFileToBase64(formData.photo) : '';
-      const nidCardBase64 = formData.nidCard ? await convertFileToBase64(formData.nidCard) : '';
-      const birthCertificateBase64 = formData.birthCertificate ? await convertFileToBase64(formData.birthCertificate) : '';
-      const educationalCertificateBase64 = formData.educationalCertificate ? await convertFileToBase64(formData.educationalCertificate) : '';
-
-      setUploadProgress(95);
-
       const message = `
 🎓 NEW APPLICATION - TTC Daudkandi Graphics Lab
 
@@ -139,7 +146,6 @@ const ApplicationForm = () => {
       });
 
       if (response.ok) {
-        setUploadProgress(100);
         toast({
           title: "Application Submitted Successfully! 🎉",
           description: "Your application has been received. We will contact you soon.",
@@ -162,6 +168,8 @@ const ApplicationForm = () => {
           birthCertificate: null,
           educationalCertificate: null,
         });
+        setCanSubmit(false);
+        setUploadStatus('');
       } else {
         throw new Error('Failed to submit application');
       }
@@ -173,9 +181,7 @@ const ApplicationForm = () => {
         variant: "destructive",
       });
     } finally {
-      clearInterval(progressInterval);
       setIsSubmitting(false);
-      setUploadProgress(0);
     }
   };
 
@@ -197,21 +203,17 @@ const ApplicationForm = () => {
               <CardTitle className="text-2xl">Application Form</CardTitle>
             </CardHeader>
             <CardContent className="p-6">
-              {isSubmitting && (
+              {uploadStatus && (
                 <div className="mb-6 bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-blue-700 dark:text-blue-300 font-medium">
                       <i className="fas fa-cloud-upload-alt mr-2"></i>
-                      Uploading images and submitting application...
+                      {uploadStatus}
                     </span>
-                    <span className="text-blue-600 dark:text-blue-400 font-bold">{uploadProgress}%</span>
                   </div>
-                  <div className="w-full bg-blue-200 dark:bg-blue-800 rounded-full h-2">
-                    <div 
-                      className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${uploadProgress}%` }}
-                    ></div>
-                  </div>
+                  {uploadProgress > 0 && uploadProgress < 100 && (
+                    <Progress value={uploadProgress} className="w-full" />
+                  )}
                 </div>
               )}
 
@@ -442,7 +444,7 @@ const ApplicationForm = () => {
                     type="submit" 
                     size="lg" 
                     className="bg-green-600 hover:bg-green-700 text-white px-8 py-3"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !canSubmit}
                   >
                     {isSubmitting ? (
                       <>

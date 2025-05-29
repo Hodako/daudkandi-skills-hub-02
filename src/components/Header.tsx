@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
+import MobileNavigation from './MobileNavigation';
 
 const Header = () => {
   const location = useLocation();
@@ -63,8 +64,8 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Navigation */}
-        <nav className="mt-6 border-t border-border pt-4">
+        {/* Desktop Navigation */}
+        <nav className="mt-6 border-t border-border pt-4 hidden sm:block">
           <ul className="flex flex-wrap justify-center lg:justify-start space-x-2 sm:space-x-8 text-xs sm:text-sm font-medium">
             <li>
               <Link 
@@ -139,6 +140,9 @@ const Header = () => {
           </ul>
         </nav>
       </div>
+
+      {/* Mobile Navigation */}
+      <MobileNavigation />
     </header>
   );
 };

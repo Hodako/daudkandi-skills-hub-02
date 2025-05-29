@@ -18,7 +18,7 @@ const GeminiChat = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=70309343580`, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAB1Wv_X7KvUqWKp9vmJ4eEghX40eHc1Ko`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -36,6 +36,10 @@ const GeminiChat = () => {
         })
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
       const aiMessage = { 
         role: 'assistant' as const, 
@@ -44,7 +48,7 @@ const GeminiChat = () => {
       setMessages(prev => [...prev, aiMessage]);
     } catch (error) {
       console.error('Error calling Gemini API:', error);
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, there was an error processing your request.' }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, there was an error processing your request. Please try again.' }]);
     } finally {
       setIsLoading(false);
     }
