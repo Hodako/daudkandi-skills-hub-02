@@ -57,21 +57,20 @@ const AnimatedBanner = () => {
                 </Button>
               </div>
 
-              <div className="flex items-center space-x-6 text-sm">
-                <div className="flex items-center">
-                  <i className="fas fa-users mr-2 text-yellow-300"></i>
-                  <span>25 Seats Available</span>
-                </div>
-                <div className="flex items-center">
-                  <i className="fas fa-clock mr-2 text-yellow-300"></i>
-                  <span>3 Months Course</span>
-                </div>
-                <div className="flex items-center">
-                  <i className="fas fa-star mr-2 text-yellow-300"></i>
-                  <span>Government Certified</span>
-                </div>
-              </div>
-            </div>
+             <div className="flex items-center space-x-6 text-sm">
+  <div className="flex items-center">
+    <i className="fas fa-users mr-2 text-yellow-300"></i>
+    <span className="text-black">25 Seats Available</span>
+  </div>
+  <div className="flex items-center">
+    <i className="fas fa-clock mr-2 text-yellow-300"></i>
+    <span>3 Months Course</span>
+  </div>
+  <div className="flex items-center">
+    <i className="fas fa-star mr-2 text-yellow-300"></i>
+    <span>Government Certified</span>
+  </div>
+</div>
 
             <div className="slide-in-right">
               <div className="relative">
