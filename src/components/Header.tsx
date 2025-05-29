@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 
 const Header = () => {
   const location = useLocation();
@@ -10,7 +11,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white shadow-md">
+    <header className="bg-background shadow-md border-b">
       {/* Top Government Bar */}
       <div className="bg-green-600 text-white py-2">
         <div className="container mx-auto px-4">
@@ -39,36 +40,39 @@ const Header = () => {
               className="h-12 w-12 sm:h-16 sm:w-16"
             />
             <div className="text-center lg:text-left">
-              <h1 className="text-lg sm:text-2xl font-bold text-gray-800">
+              <h1 className="text-lg sm:text-2xl font-bold text-foreground">
                 TTC Daudkandi Graphics Lab
               </h1>
-              <p className="text-xs sm:text-sm text-gray-600">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Technical Training Center - NSDA
               </p>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-muted-foreground">
                 National Skills Development Authority
               </p>
             </div>
           </div>
-          <div className="text-center lg:text-right">
-            <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Flag_of_Bangladesh.svg" 
-              alt="Bangladesh Flag" 
-              className="h-8 w-16 sm:h-12 sm:w-20 mx-auto lg:ml-auto"
-            />
+          <div className="flex items-center space-x-4">
+            <ThemeToggle />
+            <div className="text-center lg:text-right">
+              <img 
+                src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Flag_of_Bangladesh.svg" 
+                alt="Bangladesh Flag" 
+                className="h-8 w-16 sm:h-12 sm:w-20 mx-auto lg:ml-auto"
+              />
+            </div>
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="mt-6 border-t border-gray-200 pt-4">
+        <nav className="mt-6 border-t border-border pt-4">
           <ul className="flex flex-wrap justify-center lg:justify-start space-x-2 sm:space-x-8 text-xs sm:text-sm font-medium">
             <li>
               <Link 
                 to="/" 
-                className={`px-2 py-1 rounded transition-colors ${
+                className={`px-3 py-2 rounded transition-colors ${
                   isActivePage('/') 
-                    ? 'text-green-700 border-b-2 border-green-700 bg-green-50' 
-                    : 'text-gray-600 hover:text-green-700 hover:bg-green-50'
+                    ? 'text-green-700 border-b-2 border-green-700 bg-green-50 dark:bg-green-900/20' 
+                    : 'text-foreground hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20'
                 }`}
               >
                 Home
@@ -77,10 +81,10 @@ const Header = () => {
             <li>
               <Link 
                 to="/about" 
-                className={`px-2 py-1 rounded transition-colors ${
+                className={`px-3 py-2 rounded transition-colors ${
                   isActivePage('/about') 
-                    ? 'text-green-700 border-b-2 border-green-700 bg-green-50' 
-                    : 'text-gray-600 hover:text-green-700 hover:bg-green-50'
+                    ? 'text-green-700 border-b-2 border-green-700 bg-green-50 dark:bg-green-900/20' 
+                    : 'text-foreground hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20'
                 }`}
               >
                 About Us
@@ -89,10 +93,10 @@ const Header = () => {
             <li>
               <Link 
                 to="/courses" 
-                className={`px-2 py-1 rounded transition-colors ${
+                className={`px-3 py-2 rounded transition-colors ${
                   isActivePage('/courses') 
-                    ? 'text-green-700 border-b-2 border-green-700 bg-green-50' 
-                    : 'text-gray-600 hover:text-green-700 hover:bg-green-50'
+                    ? 'text-green-700 border-b-2 border-green-700 bg-green-50 dark:bg-green-900/20' 
+                    : 'text-foreground hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20'
                 }`}
               >
                 Courses
@@ -101,10 +105,10 @@ const Header = () => {
             <li>
               <Link 
                 to="/staff" 
-                className={`px-2 py-1 rounded transition-colors ${
+                className={`px-3 py-2 rounded transition-colors ${
                   isActivePage('/staff') 
-                    ? 'text-green-700 border-b-2 border-green-700 bg-green-50' 
-                    : 'text-gray-600 hover:text-green-700 hover:bg-green-50'
+                    ? 'text-green-700 border-b-2 border-green-700 bg-green-50 dark:bg-green-900/20' 
+                    : 'text-foreground hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20'
                 }`}
               >
                 Faculty & Staff
@@ -113,10 +117,10 @@ const Header = () => {
             <li>
               <Link 
                 to="/admission" 
-                className={`px-2 py-1 rounded transition-colors ${
+                className={`px-3 py-2 rounded transition-colors ${
                   isActivePage('/admission') 
-                    ? 'text-green-700 border-b-2 border-green-700 bg-green-50' 
-                    : 'text-gray-600 hover:text-green-700 hover:bg-green-50'
+                    ? 'text-green-700 border-b-2 border-green-700 bg-green-50 dark:bg-green-900/20' 
+                    : 'text-foreground hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20'
                 }`}
               >
                 Admission
@@ -127,7 +131,7 @@ const Header = () => {
                 href="https://nsda.gov.bd" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-green-700 hover:bg-green-50 px-2 py-1 rounded transition-colors"
+                className="text-foreground hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20 px-3 py-2 rounded transition-colors"
               >
                 NSDA Portal
               </a>

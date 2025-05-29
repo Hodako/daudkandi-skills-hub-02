@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 
@@ -49,7 +48,7 @@ const AnimatedBanner = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white text-white hover:bg-white hover:text-green-700 font-semibold px-8 py-4 text-lg glass-effect"
+                  className="border-white bg-white text-green-700 hover:bg-gray-100 hover:text-green-800 font-semibold px-8 py-4 text-lg glass-effect"
                   onClick={() => window.open('https://nsda.gov.bd', '_blank')}
                 >
                   <i className="fas fa-external-link-alt mr-2"></i>
@@ -57,7 +56,7 @@ const AnimatedBanner = () => {
                 </Button>
               </div>
 
-  <div className="flex items-center space-x-6 text-sm">
+              <div className="flex items-center space-x-6 text-sm text-white md:text-black">
                 <div className="flex items-center">
                   <i className="fas fa-users mr-2 text-yellow-300"></i>
                   <span>25 Seats Available</span>
