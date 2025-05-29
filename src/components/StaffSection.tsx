@@ -5,25 +5,25 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 const StaffSection = () => {
   const staff = [
     {
-      name: "Kamruzzaman",
+      name: "MD Kamruzzaman",
       position: "Main Instructor",
       role: "Graphics Design & Office Management Specialist",
       experience: "Senior instructor with extensive experience in graphics design and training",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
+      image: "https://upload.wikimedia.org/wikipedia/commons/8/80/Untitled_design_20250529_164238_0000.png"
     },
     {
       name: "Suborna Jerin Khan", 
       position: "Co-Instructor",
       role: "Adobe Creative Suite Specialist",
       experience: "Expert in Adobe Photoshop and Illustrator with industry experience",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b1a8?w=300&h=300&fit=crop&crop=face"
+      image: "https://upload.wikimedia.org/wikipedia/commons/7/76/Daudkandi_TTC_Subarna_Jerin_Khan.png"
     },
-    {
-      name: "Forhad Hossain",
+    
+      name: "Forhad Mia",
       position: "Support Staff",
       role: "Administrative & Technical Support",
       experience: "Provides administrative and technical assistance to students and faculty",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face"
+      image: "https://upload.wikimedia.org/wikipedia/commons/a/a8/Untitled_design_20250529_163729_0000.png"
     }
   ];
 
