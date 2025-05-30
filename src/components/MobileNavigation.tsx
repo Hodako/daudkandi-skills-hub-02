@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 
 const MobileNavigation = () => {
@@ -28,16 +28,16 @@ const MobileNavigation = () => {
   return (
     <div className="lg:hidden bg-background border-t border-border">
       {/* Mobile Menu Toggle */}
-      <div className="flex items-center justify-between px-4 py-3">
+      <div className="flex items-center justify-between px-4 py-2">
         <button
           onClick={toggleMenu}
           className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           aria-label="Toggle menu"
         >
           {isMenuOpen ? (
-            <X className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+            <X className="h-5 w-5 text-gray-600 dark:text-gray-300" />
           ) : (
-            <Menu className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+            <Menu className="h-5 w-5 text-gray-600 dark:text-gray-300" />
           )}
         </button>
         

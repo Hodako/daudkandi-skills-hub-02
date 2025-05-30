@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import ThemeToggle from './ThemeToggle';
 import MobileNavigation from './MobileNavigation';
 
 const Header = () => {
@@ -14,14 +13,14 @@ const Header = () => {
   return (
     <header className="bg-background/95 backdrop-blur-md shadow-md border-b relative">
       {/* Main Header */}
-      <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-4">
+      <div className="container mx-auto px-2 sm:px-4 py-1 sm:py-4">
         <div className="flex items-center justify-between">
           {/* Mobile Layout */}
           <div className="flex items-center space-x-2 lg:hidden">
             <img 
               src="https://nsda.gov.bd/themes/responsive_npf/img/logo/logo.png" 
               alt="NSDA Logo" 
-              className="h-6 w-6 sm:h-8 sm:w-8"
+              className="h-5 w-5 sm:h-6 sm:w-6"
             />
             <div>
               <h1 className="text-xs sm:text-sm font-bold text-foreground font-roboto">
@@ -54,7 +53,6 @@ const Header = () => {
           </div>
 
           <div className="flex items-center space-x-2">
-            <ThemeToggle />
             <img 
               src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Flag_of_Bangladesh.svg" 
               alt="Bangladesh Flag" 
@@ -64,7 +62,7 @@ const Header = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="mt-4 border-t border-border pt-4 hidden lg:block">
+        <nav className="mt-3 border-t border-border pt-2 hidden lg:block">
           <ul className="flex justify-center lg:justify-start space-x-8 text-sm font-medium">
             <li>
               <Link 
