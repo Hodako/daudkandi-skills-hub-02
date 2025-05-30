@@ -12,65 +12,49 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-background shadow-md border-b">
-      {/* Top Government Bar */}
-      <div className="bg-green-600 text-white py-2">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm">
-            <div className="flex flex-col sm:flex-row items-center space-y-1 sm:space-y-0 sm:space-x-4">
-              <span>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</span>
-              <span className="hidden sm:inline">|</span>
-              <span>Government of the People's Republic of Bangladesh</span>
-            </div>
-            <div className="flex flex-col sm:flex-row items-center space-y-1 sm:space-y-0 sm:space-x-4">
-              <span>৫ পৌষ ১৪৩১</span>
-              <span className="hidden sm:inline">|</span>
-              <span>{new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <header className="bg-background shadow-md border-b relative">
       {/* Main Header */}
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
-          <div className="flex items-center space-x-4">
+      <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-4">
+        <div className="flex flex-col lg:flex-row items-center justify-between space-y-2 lg:space-y-0">
+          <div className="flex items-center space-x-2 sm:space-x-4">
             <img 
               src="https://nsda.gov.bd/themes/responsive_npf/img/logo/logo.png" 
               alt="NSDA Logo" 
-              className="h-12 w-12 sm:h-16 sm:w-16"
+              className="h-8 w-8 sm:h-12 sm:w-12 lg:h-16 lg:w-16"
             />
             <div className="text-center lg:text-left">
-              <h1 className="text-lg sm:text-2xl font-bold text-foreground">
+              <h1 className="text-sm sm:text-lg lg:text-2xl font-bold text-foreground font-roboto">
                 TTC Daudkandi Graphics Lab
               </h1>
-              <p className="text-xs sm:text-sm text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground font-cascadia">
                 Technical Training Center - NSDA
               </p>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-muted-foreground font-cascadia hidden sm:block">
                 National Skills Development Authority
               </p>
             </div>
           </div>
-          <div className="flex items-center space-x-4">
-            <ThemeToggle />
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <div className="hidden lg:block">
+              <ThemeToggle />
+            </div>
             <div className="text-center lg:text-right">
               <img 
                 src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Flag_of_Bangladesh.svg" 
                 alt="Bangladesh Flag" 
-                className="h-8 w-16 sm:h-12 sm:w-20 mx-auto lg:ml-auto"
+                className="h-6 w-12 sm:h-8 sm:w-16 lg:h-12 lg:w-20 mx-auto lg:ml-auto"
               />
             </div>
           </div>
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="mt-6 border-t border-border pt-4 hidden sm:block">
-          <ul className="flex flex-wrap justify-center lg:justify-start space-x-2 sm:space-x-8 text-xs sm:text-sm font-medium">
+        <nav className="mt-4 border-t border-border pt-4 hidden lg:block">
+          <ul className="flex justify-center lg:justify-start space-x-2 sm:space-x-8 text-sm font-medium">
             <li>
               <Link 
                 to="/" 
-                className={`px-3 py-2 rounded transition-colors ${
+                className={`px-3 py-2 rounded transition-colors font-roboto ${
                   isActivePage('/') 
                     ? 'text-green-700 border-b-2 border-green-700 bg-green-50 dark:bg-green-900/20' 
                     : 'text-foreground hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20'
@@ -82,7 +66,7 @@ const Header = () => {
             <li>
               <Link 
                 to="/about" 
-                className={`px-3 py-2 rounded transition-colors ${
+                className={`px-3 py-2 rounded transition-colors font-roboto ${
                   isActivePage('/about') 
                     ? 'text-green-700 border-b-2 border-green-700 bg-green-50 dark:bg-green-900/20' 
                     : 'text-foreground hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20'
@@ -94,7 +78,7 @@ const Header = () => {
             <li>
               <Link 
                 to="/courses" 
-                className={`px-3 py-2 rounded transition-colors ${
+                className={`px-3 py-2 rounded transition-colors font-roboto ${
                   isActivePage('/courses') 
                     ? 'text-green-700 border-b-2 border-green-700 bg-green-50 dark:bg-green-900/20' 
                     : 'text-foreground hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20'
@@ -106,7 +90,7 @@ const Header = () => {
             <li>
               <Link 
                 to="/staff" 
-                className={`px-3 py-2 rounded transition-colors ${
+                className={`px-3 py-2 rounded transition-colors font-roboto ${
                   isActivePage('/staff') 
                     ? 'text-green-700 border-b-2 border-green-700 bg-green-50 dark:bg-green-900/20' 
                     : 'text-foreground hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20'
@@ -118,7 +102,7 @@ const Header = () => {
             <li>
               <Link 
                 to="/admission" 
-                className={`px-3 py-2 rounded transition-colors ${
+                className={`px-3 py-2 rounded transition-colors font-roboto ${
                   isActivePage('/admission') 
                     ? 'text-green-700 border-b-2 border-green-700 bg-green-50 dark:bg-green-900/20' 
                     : 'text-foreground hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20'
@@ -132,7 +116,7 @@ const Header = () => {
                 href="https://nsda.gov.bd" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-foreground hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20 px-3 py-2 rounded transition-colors"
+                className="text-foreground hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20 px-3 py-2 rounded transition-colors font-roboto"
               >
                 NSDA Portal
               </a>

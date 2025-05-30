@@ -2,11 +2,11 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import AnimatedBanner from '@/components/AnimatedBanner';
+import HeroSection from '@/components/HeroSection';
 import CourseHighlights from '@/components/CourseHighlights';
 import StaffSection from '@/components/StaffSection';
 import EnhancedNSDAPortal from '@/components/EnhancedNSDAPortal';
-import LocationInfo from '@/components/LocationInfo';
+import LocationFAQ from '@/components/LocationFAQ';
 import ApplicationForm from '@/components/ApplicationForm';
 import GoogleMap from '@/components/GoogleMap';
 import GeminiChat from '@/components/GeminiChat';
@@ -16,7 +16,7 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow">
-        <AnimatedBanner />
+        <HeroSection />
         <CourseHighlights />
         <StaffSection />
         <EnhancedNSDAPortal />
@@ -26,10 +26,10 @@ const Index = () => {
         <section className="py-16 bg-white dark:bg-gray-800">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-4 font-roboto">
                 Find Us
               </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300">
+              <p className="text-lg text-gray-600 dark:text-gray-300 font-cascadia">
                 Visit our training center located in Daudkandi
               </p>
             </div>
@@ -39,7 +39,7 @@ const Index = () => {
           </div>
         </section>
         
-        <LocationInfo />
+        <LocationFAQ />
       </main>
       <Footer />
       <GeminiChat />
