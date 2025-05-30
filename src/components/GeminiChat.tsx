@@ -56,10 +56,10 @@ const GeminiChat = () => {
 
   if (!isOpen) {
     return (
-      <div className="fixed bottom-4 right-4 z-50">
+      <div className="fixed bottom-4 right-4 z-50 mx-2 md:mx-0">
         <Button
           onClick={() => setIsOpen(true)}
-          className="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg"
+          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full p-4 shadow-lg transform transition-all duration-300 hover:scale-110 animate-pulse"
         >
           <i className="fas fa-robot text-xl"></i>
         </Button>
@@ -68,34 +68,54 @@ const GeminiChat = () => {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 w-80 h-96">
-      <Card className="h-full flex flex-col">
-        <CardHeader className="bg-blue-600 text-white rounded-t-lg p-3">
-          <CardTitle className="text-sm flex justify-between items-center">
-            <span>AI Assistant</span>
+    <div className="fixed bottom-4 right-4 z-50 w-80 max-w-[calc(100vw-2rem)] h-96 mx-2 md:mx-0 animate-fade-in">
+      <Card className="h-full flex flex-col shadow-2xl border-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg">
+        <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-t-lg p-3">
+          <CardTitle className="text-sm flex justify-between items-center font-roboto">
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <span>AI Assistant</span>
+            </div>
             <Button
               onClick={() => setIsOpen(false)}
               variant="ghost"
               size="sm"
-              className="text-white hover:bg-blue-700"
+              className="text-white hover:bg-white/20 transition-colors"
             >
               <i className="fas fa-times"></i>
             </Button>
           </CardTitle>
         </CardHeader>
-        <CardContent className="flex-1 p-3 overflow-hidden flex flex-col">
-          <div className="flex-1 overflow-y-auto space-y-2 mb-3">
+        <CardContent className="flex-1 p-3 overflow-hidden flex flex-col bg-gray-50 dark:bg-gray-800">
+          <div className="flex-1 overflow-y-auto space-y-3 mb-3 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600">
+            {messages.length === 0 && (
+              <div className="text-center text-gray-500 dark:text-gray-400 text-xs mt-4">
+                <i className="fas fa-comment-dots text-2xl mb-2 block"></i>
+                Ask me anything about the course!
+              </div>
+            )}
             {messages.map((message, index) => (
-              <div key={index} className={`text-sm p-2 rounded ${
-                message.role === 'user' ? 'bg-blue-100 ml-4' : 'bg-gray-100 mr-4'
+              <div key={index} className={`text-xs p-3 rounded-lg shadow-sm ${
+                message.role === 'user' 
+                  ? 'bg-blue-500 text-white ml-4 animate-slide-in-right' 
+                  : 'bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 mr-4 border animate-slide-in-left'
               }`}>
+                <div className="font-medium mb-1 opacity-75">
+                  {message.role === 'user' ? 'You' : 'AI Assistant'}
+                </div>
                 {message.content}
               </div>
             ))}
             {isLoading && (
-              <div className="bg-gray-100 mr-4 p-2 rounded text-sm">
-                <i className="fas fa-spinner fa-spin mr-2"></i>
-                Thinking...
+              <div className="bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 mr-4 p-3 rounded-lg text-xs border animate-pulse">
+                <div className="flex items-center space-x-2">
+                  <div className="flex space-x-1">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                  </div>
+                  <span>AI is thinking...</span>
+                </div>
               </div>
             )}
           </div>
@@ -104,18 +124,18 @@ const GeminiChat = () => {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+              onKeyPress={(e) => e.key === 'Enter' && !isLoading && sendMessage()}
               placeholder="Ask me anything..."
-              className="flex-1 px-3 py-2 border rounded text-sm"
+              className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-xs bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               disabled={isLoading}
             />
             <Button
               onClick={sendMessage}
               size="sm"
-              disabled={isLoading}
-              className="bg-blue-600 hover:bg-blue-700"
+              disabled={isLoading || !input.trim()}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
             >
-              <i className="fas fa-paper-plane"></i>
+              <i className={`fas ${isLoading ? 'fa-spinner fa-spin' : 'fa-paper-plane'}`}></i>
             </Button>
           </div>
         </CardContent>

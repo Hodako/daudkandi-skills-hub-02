@@ -12,7 +12,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-background shadow-md border-b relative">
+    <header className="bg-background/95 backdrop-blur-md shadow-md border-b relative">
       {/* Main Header */}
       <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-4">
         <div className="flex items-center justify-between">
@@ -21,10 +21,10 @@ const Header = () => {
             <img 
               src="https://nsda.gov.bd/themes/responsive_npf/img/logo/logo.png" 
               alt="NSDA Logo" 
-              className="h-8 w-8 sm:h-10 sm:w-10"
+              className="h-6 w-6 sm:h-8 sm:w-8"
             />
             <div>
-              <h1 className="text-sm sm:text-base font-bold text-foreground font-roboto">
+              <h1 className="text-xs sm:text-sm font-bold text-foreground font-roboto">
                 TTC Daudkandi Graphics Lab
               </h1>
               <p className="text-xs text-muted-foreground font-cascadia">
@@ -54,13 +54,11 @@ const Header = () => {
           </div>
 
           <div className="flex items-center space-x-2">
-            <div className="hidden lg:block">
-              <ThemeToggle />
-            </div>
+            <ThemeToggle />
             <img 
               src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Flag_of_Bangladesh.svg" 
               alt="Bangladesh Flag" 
-              className="h-6 w-12 sm:h-8 sm:w-16 lg:h-12 lg:w-20"
+              className="h-4 w-8 sm:h-6 sm:w-12 lg:h-12 lg:w-20"
             />
           </div>
         </div>

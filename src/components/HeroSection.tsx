@@ -43,10 +43,11 @@ const HeroSection = () => {
                 Apply Now - FREE Course
                 <i className="fas fa-arrow-down ml-2"></i>
               </Button>
+              {/* NSDA Portal button - hidden on mobile */}
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-2 border-white text-white hover:bg-white hover:text-green-700 font-semibold px-6 py-3 text-sm sm:text-base glass-effect hover-lift font-roboto w-full sm:w-auto"
+                className="hidden sm:flex border-2 border-white text-white hover:bg-white hover:text-green-700 font-semibold px-6 py-3 text-sm sm:text-base glass-effect hover-lift font-roboto w-full sm:w-auto"
                 onClick={() => window.open('https://nsda.gov.bd', '_blank')}
               >
                 <i className="fas fa-external-link-alt mr-2"></i>
