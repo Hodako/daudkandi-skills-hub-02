@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 const Staff = () => {
   const staffMembers = [
     {
-      name: "Kamruzzaman",
+      name: "Md Kamruzzaman",
       position: "Main Instructor",
       qualifications: [
         "Bachelor's in Computer Science",
@@ -23,7 +23,7 @@ const Staff = () => {
         "Logo and Brand Design"
       ],
       experience: "With over a decade of experience in the graphics design industry, Kamruzzaman sir brings professional expertise and practical knowledge to our training program. He has worked with various local and international clients, providing students with real-world insights.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
+      image: "https://upload.wikimedia.org/wikipedia/commons/8/80/Untitled_design_20250529_164238_0000.png"
     },
     {
       name: "Suborna Jerin Khan",
@@ -42,10 +42,10 @@ const Staff = () => {
         "Portfolio Development"
       ],
       experience: "Suborna brings a unique blend of artistic creativity and technical expertise to our program. Her background in fine arts combined with modern digital design skills helps students develop both aesthetic sense and technical proficiency.",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b1a8?w=300&h=300&fit=crop&crop=face"
+      image: "https://upload.wikimedia.org/wikipedia/commons/7/76/Daudkandi_TTC_Subarna_Jerin_Khan.png"
     },
     {
-      name: "Forhad Hossain",
+      name: "Forhad Mia",
       position: "Support Staff",
       qualifications: [
         "Diploma in Computer Applications",
@@ -61,7 +61,7 @@ const Staff = () => {
         "Student Counseling"
       ],
       experience: "Forhad ensures smooth operation of our training center by providing comprehensive support to both students and faculty. His dedication to student success and administrative efficiency makes him an invaluable team member.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face"
+      image: "https://upload.wikimedia.org/wikipedia/commons/a/a8/Untitled_design_20250529_163729_0000.png"
     }
   ];
 
