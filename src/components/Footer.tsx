@@ -3,7 +3,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white">
+    <footer className="bg-gray-800 dark:bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
@@ -47,12 +47,15 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+        <div className="border-t border-gray-700 dark:border-gray-600 mt-8 pt-8 text-center">
           <p className="text-sm">
             © 2024 TTC Daudkandi Graphics Lab - National Skills Development Authority (NSDA)
           </p>
           <p className="text-xs mt-2 text-gray-400">
             Government of the People's Republic of Bangladesh
+          </p>
+          <p className="text-xs mt-2 text-gray-400">
+            All rights reserved Azizul Hakim on behalf of TTC
           </p>
         </div>
       </div>

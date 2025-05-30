@@ -18,7 +18,8 @@ const HeroSection = () => {
         <div className="absolute inset-0 flex items-center justify-center px-4">
           <div className="text-center text-white max-w-4xl w-full">
             <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold mb-4 font-roboto leading-tight text-white">
-              Technical Training Center
+              {/* Hide "Technical Training Center" on mobile */}
+              <span className="hidden sm:block">Technical Training Center</span>
               <span className="block text-xl sm:text-3xl lg:text-5xl mt-2 text-yellow-300 font-berlin">
                 Daudkandi Graphics Lab
               </span>
@@ -30,7 +31,7 @@ const HeroSection = () => {
               <span className="font-semibold text-yellow-300"> NSDA certification.</span>
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4 sm:px-8 mb-6">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4 sm:px-8 mb-8">
               <Button 
                 size="lg" 
                 className="bg-green-600 text-white hover:bg-green-700 font-semibold px-6 py-3 text-sm sm:text-base hover-lift pulse-glow font-roboto w-full sm:w-auto"

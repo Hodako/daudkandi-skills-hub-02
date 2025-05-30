@@ -18,6 +18,9 @@ const GeminiChat = () => {
     setIsLoading(true);
 
     try {
+      // Add AI preset to the message
+      const aiPreset = "You are Jamu, an AI assistant from Daudkandi TTC (Technical Training Center). You were trained by Master BanguBustard. You help students and visitors with information about our graphics design courses, NSDA certification, and training programs. Always be helpful and professional. ";
+      
       const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAB1Wv_X7KvUqWKp9vmJ4eEghX40eHc1Ko`, {
         method: 'POST',
         headers: {
@@ -28,7 +31,7 @@ const GeminiChat = () => {
             {
               parts: [
                 {
-                  text: input
+                  text: aiPreset + input
                 }
               ]
             }
@@ -74,7 +77,7 @@ const GeminiChat = () => {
           <CardTitle className="text-sm flex justify-between items-center font-roboto">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span>AI Assistant</span>
+              <span>Jamu - AI Assistant</span>
             </div>
             <Button
               onClick={() => setIsOpen(false)}
@@ -91,7 +94,7 @@ const GeminiChat = () => {
             {messages.length === 0 && (
               <div className="text-center text-gray-500 dark:text-gray-400 text-xs mt-4">
                 <i className="fas fa-comment-dots text-2xl mb-2 block"></i>
-                Ask me anything about the course!
+                Hi! I'm Jamu from Daudkandi TTC. Ask me anything about our courses!
               </div>
             )}
             {messages.map((message, index) => (
@@ -101,7 +104,7 @@ const GeminiChat = () => {
                   : 'bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 mr-4 border animate-slide-in-left'
               }`}>
                 <div className="font-medium mb-1 opacity-75">
-                  {message.role === 'user' ? 'You' : 'AI Assistant'}
+                  {message.role === 'user' ? 'You' : 'Jamu'}
                 </div>
                 {message.content}
               </div>
@@ -114,7 +117,7 @@ const GeminiChat = () => {
                     <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                     <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                   </div>
-                  <span>AI is thinking...</span>
+                  <span>Jamu is thinking...</span>
                 </div>
               </div>
             )}

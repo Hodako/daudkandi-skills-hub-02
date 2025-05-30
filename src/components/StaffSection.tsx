@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -27,20 +28,20 @@ const StaffSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">
+          <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
             Our Faculty & Staff
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Meet our experienced team of instructors and support staff dedicated to your success
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {staff.map((member, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow">
+            <Card key={index} className="hover:shadow-lg transition-shadow bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4">
                   <img 
@@ -49,12 +50,12 @@ const StaffSection = () => {
                     className="w-32 h-32 rounded-full object-cover mx-auto"
                   />
                 </div>
-                <CardTitle className="text-xl text-gray-800">{member.name}</CardTitle>
-                <p className="text-green-600 font-semibold">{member.position}</p>
-                <p className="text-sm text-gray-500">{member.role}</p>
+                <CardTitle className="text-xl text-gray-800 dark:text-white">{member.name}</CardTitle>
+                <p className="text-green-600 dark:text-green-400 font-semibold">{member.position}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{member.role}</p>
               </CardHeader>
               <CardContent className="text-center">
-                <p className="text-gray-600 text-sm">{member.experience}</p>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">{member.experience}</p>
               </CardContent>
             </Card>
           ))}
