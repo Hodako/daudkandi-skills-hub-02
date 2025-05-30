@@ -14,7 +14,7 @@ const CourseHighlights = () => {
       title: '3 Month Duration',
       description: 'Comprehensive course designed to be completed in 3 months with practical training',
       color: 'bg-blue-500',
-      image: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=300&h=200&fit=crop'
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWJA-qhV6xCMOZa8RrhrjUTIblSB93FC3PZP7P0-zn3BHFSLXU8ZFdPtMC&s=10'
     },
     {
       icon: 'fas fa-certificate',
