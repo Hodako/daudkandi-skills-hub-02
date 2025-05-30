@@ -15,8 +15,8 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/30"></div>
         
         {/* Overlay Content */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white px-4 max-w-4xl">
+        <div className="absolute inset-0 flex items-center justify-center px-4">
+          <div className="text-center text-white max-w-4xl w-full">
             <h1 className="text-2xl sm:text-4xl lg:text-6xl font-bold mb-4 font-roboto leading-tight">
               Technical Training Center
               <span className="block text-xl sm:text-3xl lg:text-5xl mt-2 text-yellow-300 font-berlin">
@@ -25,26 +25,28 @@ const HeroSection = () => {
             </h1>
             
             <p className="text-sm sm:text-lg lg:text-2xl mb-6 opacity-90 font-cascadia">
-              Professional Graphics Design Training under 
-              <span className="font-semibold text-yellow-300"> NSDA</span>
+              Master professional graphics design with our comprehensive 3-month program. 
+              Learn Office Management, Adobe Photoshop, and Illustrator under 
+              <span className="font-semibold text-yellow-300"> NSDA certification.</span>
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4 sm:px-8">
               <Button 
                 size="lg" 
-                className="bg-white text-green-700 hover:bg-gray-100 font-semibold px-6 py-3 text-sm sm:text-base hover-lift pulse-glow font-roboto"
+                className="bg-green-600 text-white hover:bg-green-700 font-semibold px-6 py-3 text-sm sm:text-base hover-lift pulse-glow font-roboto w-full sm:w-auto"
                 onClick={() => {
                   const applySection = document.getElementById('apply-now');
                   applySection?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
                 <i className="fas fa-graduation-cap mr-2"></i>
-                Apply for Admission
+                Apply Now - FREE Course
+                <i className="fas fa-arrow-down ml-2"></i>
               </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-green-700 font-semibold px-6 py-3 text-sm sm:text-base glass-effect hover-lift font-roboto"
+                className="border-2 border-white text-white hover:bg-white hover:text-green-700 font-semibold px-6 py-3 text-sm sm:text-base glass-effect hover-lift font-roboto w-full sm:w-auto"
                 onClick={() => window.open('https://nsda.gov.bd', '_blank')}
               >
                 <i className="fas fa-external-link-alt mr-2"></i>
