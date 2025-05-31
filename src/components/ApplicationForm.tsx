@@ -82,39 +82,20 @@ const ApplicationForm = () => {
     });
   };
 
-const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-  const input = e.target;
-  const { name, files } = input;
-
-  if (files && files.length > 0) {
-    const originalFile = files[0];
-
-    // Optional: prevent uploading same file if already selected
-    const isSameFile =
-      formData[name as keyof typeof formData] instanceof File &&
-      (formData[name as keyof typeof formData] as File).name === originalFile.name &&
-      (formData[name as keyof typeof formData] as File).size === originalFile.size;
-
-    if (isSameFile) {
-      // To force re-upload simulation if same file is selected again
-      setUploadProgress(prev => ({ ...prev, [name]: 0 }));
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, files } = e.target;
+    if (files && files[0]) {
+      const originalFile = files[0];
+      
+      // Compress image if it's an image file
+      const processedFile = originalFile.type.startsWith('image/') 
+        ? await compressImage(originalFile)
+        : originalFile;
+      
+      setFormData(prev => ({ ...prev, [name]: processedFile }));
+      simulateImageUpload(name, processedFile);
     }
-
-    // Compress if it's an image
-    const processedFile = originalFile.type.startsWith('image/')
-      ? await compressImage(originalFile)
-      : originalFile;
-
-    // Set the file in form state
-    setFormData(prev => ({ ...prev, [name]: processedFile }));
-
-    // Trigger upload simulation
-    simulateImageUpload(name, processedFile);
-
-    // Reset input value so same file can be selected again next time
-    input.value = '';
-  }
-};
+  };
 
   const simulateImageUpload = (fieldName: string, file: File) => {
     setUploadProgress(prev => ({ ...prev, [fieldName]: 0 }));
