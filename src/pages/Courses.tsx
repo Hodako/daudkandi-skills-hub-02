@@ -48,29 +48,29 @@ const Courses = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900">
       <Header />
-      <main className="flex-grow py-16 bg-gray-50">
+      <main className="flex-grow py-16 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">
+            <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
               Graphics Design Course
             </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Comprehensive 3-month program covering essential graphics design and office management skills
             </p>
           </div>
 
           <div className="max-w-4xl mx-auto mb-12">
-            <Card className="mb-8">
+            <Card className="mb-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader className="bg-green-600 text-white rounded-t-lg">
                 <CardTitle className="text-2xl">Course Overview</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <h3 className="font-semibold text-gray-800 mb-3">Course Details</h3>
-                    <ul className="space-y-2 text-gray-600">
+                    <h3 className="font-semibold text-gray-800 dark:text-white mb-3">Course Details</h3>
+                    <ul className="space-y-2 text-gray-600 dark:text-gray-300">
                       <li><span className="font-medium">Duration:</span> 3 Months (12 Weeks)</li>
                       <li><span className="font-medium">Class Size:</span> Maximum 25 Students</li>
                       <li><span className="font-medium">Schedule:</span> 6 days per week</li>
@@ -79,8 +79,8 @@ const Courses = () => {
                     </ul>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-800 mb-3">Prerequisites</h3>
-                    <ul className="space-y-2 text-gray-600">
+                    <h3 className="font-semibold text-gray-800 dark:text-white mb-3">Prerequisites</h3>
+                    <ul className="space-y-2 text-gray-600 dark:text-gray-300">
                       <li>• Basic computer literacy</li>
                       <li>• High school education or equivalent</li>
                       <li>• Age: 18-35 years</li>
@@ -94,11 +94,11 @@ const Courses = () => {
 
             <div className="space-y-6">
               {courseModules.map((module, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
+                <Card key={index} className="hover:shadow-lg transition-shadow bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <CardHeader>
                     <div className="flex items-center justify-between">
-                      <CardTitle className="text-xl text-gray-800">{module.title}</CardTitle>
-                      <Badge variant="secondary" className="bg-green-100 text-green-800">
+                      <CardTitle className="text-xl text-gray-800 dark:text-white">{module.title}</CardTitle>
+                      <Badge variant="secondary" className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200">
                         {module.week}
                       </Badge>
                     </div>
@@ -108,7 +108,7 @@ const Courses = () => {
                       {module.topics.map((topic, topicIndex) => (
                         <div key={topicIndex} className="flex items-center">
                           <span className="w-2 h-2 bg-green-500 rounded-full mr-3 flex-shrink-0"></span>
-                          <span className="text-gray-600">{topic}</span>
+                          <span className="text-gray-600 dark:text-gray-300">{topic}</span>
                         </div>
                       ))}
                     </div>
@@ -117,39 +117,39 @@ const Courses = () => {
               ))}
             </div>
 
-            <Card className="mt-8">
+            <Card className="mt-8 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader>
-                <CardTitle className="text-xl text-gray-800">Career Opportunities</CardTitle>
+                <CardTitle className="text-xl text-gray-800 dark:text-white">Career Opportunities</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">
+                <p className="text-gray-600 dark:text-gray-300 mb-4">
                   Upon successful completion of this course, graduates will be equipped for various career paths:
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <ul className="space-y-2">
-                    <li className="flex items-center text-gray-600">
+                    <li className="flex items-center text-gray-600 dark:text-gray-300">
                       <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                       Graphic Designer
                     </li>
-                    <li className="flex items-center text-gray-600">
+                    <li className="flex items-center text-gray-600 dark:text-gray-300">
                       <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                       Digital Marketing Assistant
                     </li>
-                    <li className="flex items-center text-gray-600">
+                    <li className="flex items-center text-gray-600 dark:text-gray-300">
                       <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                       Office Administrator
                     </li>
                   </ul>
                   <ul className="space-y-2">
-                    <li className="flex items-center text-gray-600">
+                    <li className="flex items-center text-gray-600 dark:text-gray-300">
                       <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                       Freelance Designer
                     </li>
-                    <li className="flex items-center text-gray-600">
+                    <li className="flex items-center text-gray-600 dark:text-gray-300">
                       <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                       Print Media Designer
                     </li>
-                    <li className="flex items-center text-gray-600">
+                    <li className="flex items-center text-gray-600 dark:text-gray-300">
                       <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                       Small Business Owner
                     </li>

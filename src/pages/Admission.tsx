@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -8,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 
 const Admission = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900">
       <Header />
       <main className="flex-grow py-16 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4">
@@ -22,15 +23,15 @@ const Admission = () => {
           </div>
 
           <div className="max-w-4xl mx-auto space-y-8 mb-16">
-            <Card>
+            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader className="bg-green-600 text-white rounded-t-lg">
                 <CardTitle className="text-2xl">Admission Requirements</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">Educational Requirements</h3>
-                    <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+                    <h3 className="font-semibold text-gray-800 dark:text-white mb-3">Educational Requirements</h3>
+                    <ul className="space-y-2 text-gray-600 dark:text-gray-300">
                       <li>• Minimum HSC/SSC or equivalent</li>
                       <li>• Basic computer knowledge</li>
                       <li>• English reading capability</li>
@@ -38,8 +39,8 @@ const Admission = () => {
                     </ul>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-3">General Requirements</h3>
-                    <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+                    <h3 className="font-semibold text-gray-800 dark:text-white mb-3">General Requirements</h3>
+                    <ul className="space-y-2 text-gray-600 dark:text-gray-300">
                       <li>• Age: 18-35 years</li>
                       <li>• Bangladeshi citizen</li>
                       <li>• Physically and mentally fit</li>
@@ -50,36 +51,36 @@ const Admission = () => {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader>
-                <CardTitle className="text-xl text-gray-800 dark:text-gray-200">Required Documents</CardTitle>
+                <CardTitle className="text-xl text-gray-800 dark:text-white">Required Documents</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <ul className="space-y-2">
-                    <li className="flex items-center text-gray-600 dark:text-gray-400">
+                    <li className="flex items-center text-gray-600 dark:text-gray-300">
                       <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                       Educational certificates (SSC/HSC)
                     </li>
-                    <li className="flex items-center text-gray-600 dark:text-gray-400">
+                    <li className="flex items-center text-gray-600 dark:text-gray-300">
                       <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                       National ID card copy
                     </li>
-                    <li className="flex items-center text-gray-600 dark:text-gray-400">
+                    <li className="flex items-center text-gray-600 dark:text-gray-300">
                       <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                       Birth certificate copy
                     </li>
                   </ul>
                   <ul className="space-y-2">
-                    <li className="flex items-center text-gray-600 dark:text-gray-400">
+                    <li className="flex items-center text-gray-600 dark:text-gray-300">
                       <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                       Passport size photographs (4 copies)
                     </li>
-                    <li className="flex items-center text-gray-600 dark:text-gray-400">
+                    <li className="flex items-center text-gray-600 dark:text-gray-300">
                       <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                       Guardian's consent (if under 21)
                     </li>
-                    <li className="flex items-center text-gray-600 dark:text-gray-400">
+                    <li className="flex items-center text-gray-600 dark:text-gray-300">
                       <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                       Medical fitness certificate
                     </li>
@@ -88,14 +89,14 @@ const Admission = () => {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader>
-                <CardTitle className="text-xl text-gray-800 dark:text-gray-200">Course Fee & Financial Information</CardTitle>
+                <CardTitle className="text-xl text-gray-800 dark:text-white">Course Fee & Financial Information</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg text-center">
+                <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg text-center border border-green-200 dark:border-green-800">
                   <h3 className="text-2xl font-bold text-green-700 dark:text-green-400 mb-2">FREE TRAINING</h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
                     This course is completely free of cost as it is funded by the Government of Bangladesh 
                     through NSDA (National Skills Development Authority).
                   </p>

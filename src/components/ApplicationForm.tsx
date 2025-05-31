@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -14,7 +15,7 @@ const ApplicationForm = () => {
     email: '',
     address: '',
     currentStatus: '',
-    documentType: 'nid', // 'nid' or 'birth'
+    documentType: 'nid' as 'nid' | 'birth',
     documentNumber: '',
     photo: null as File | null,
     identityDocument: null as File | null,
@@ -31,29 +32,62 @@ const ApplicationForm = () => {
   const [canSubmit, setCanSubmit] = useState(false);
   const { toast } = useToast();
 
-const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-  const { name, value } = e.target;
-  setFormData(prev => ({ ...prev, [name]: value }));
-  // remove: checkFormCompletion();
-};
+  const checkFormCompletion = useCallback(() => {
+    const requiredFields = [
+      'fullName', 'fatherName', 'motherName', 'dateOfBirth',
+      'mobileNumber', 'email', 'address', 'currentStatus',
+      'documentNumber'
+    ];
 
-const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-  const { name, files } = e.target;
-  if (files && files[0]) {
-    const originalFile = files[0];
-    const processedFile = originalFile.type.startsWith('image/') 
-      ? await compressImage(originalFile)
-      : originalFile;
-    setFormData(prev => ({ ...prev, [name]: processedFile }));
-    simulateImageUpload(name, processedFile);
-    // remove: checkFormCompletion();
-  }
-};
+    const requiredFiles = ['photo', 'identityDocument', 'educationalCertificate'];
 
-// Add this useEffect at the top-level of your component:
-React.useEffect(() => {
-  checkFormCompletion();
-}, [formData, uploadProgress]);
+    const fieldsComplete = requiredFields.every(field => {
+      const value = formData[field as keyof typeof formData];
+      return value !== null && value !== undefined && value !== '';
+    });
+    
+    const filesComplete = requiredFiles.every(field => {
+      const file = formData[field as keyof typeof formData] as File | null;
+      return file !== null;
+    });
+    
+    const uploadsComplete = requiredFiles.every(field => 
+      uploadProgress[field as keyof typeof uploadProgress] === 100
+    );
+
+    // Check that the three files are unique (not the same file object)
+    const fileObjs = requiredFiles.map(field => formData[field as keyof typeof formData]) as (File | null)[];
+    let filesAreUnique = true;
+    if (fileObjs.every(Boolean)) {
+      const fileIds = fileObjs.map(file => file ? `${file.name}_${file.lastModified}_${file.size}` : '');
+      filesAreUnique = new Set(fileIds).size === fileIds.length;
+    }
+
+    console.log('Form validation:', {
+      fieldsComplete,
+      filesComplete,
+      uploadsComplete,
+      filesAreUnique,
+      formData: Object.keys(formData).reduce((acc, key) => {
+        const value = formData[key as keyof typeof formData];
+        acc[key] = value instanceof File ? `File: ${value.name}` : value;
+        return acc;
+      }, {} as any),
+      uploadProgress
+    });
+
+    setCanSubmit(fieldsComplete && filesComplete && uploadsComplete && filesAreUnique);
+  }, [formData, uploadProgress]);
+
+  // Advanced synchronization system - check form completion on any change
+  useEffect(() => {
+    checkFormCompletion();
+  }, [checkFormCompletion]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const compressImage = (file: File): Promise<File> => {
     return new Promise((resolve) => {
@@ -100,51 +134,51 @@ React.useEffect(() => {
     });
   };
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, files } = e.target;
-    if (files && files[0]) {
-      const originalFile = files[0];
-      
-      // Compress image if it's an image file
-      const processedFile = originalFile.type.startsWith('image/') 
-        ? await compressImage(originalFile)
-        : originalFile;
-      
-      setFormData(prev => ({ ...prev, [name]: processedFile }));
-      simulateImageUpload(name, processedFile);
-    }
-  };
-
   const simulateImageUpload = (fieldName: string, file: File) => {
     setUploadProgress(prev => ({ ...prev, [fieldName]: 0 }));
     
     const interval = setInterval(() => {
       setUploadProgress(prev => {
-        const newProgress = prev[fieldName as keyof typeof prev] + 20;
+        const newProgress = prev[fieldName as keyof typeof prev] + 25;
         if (newProgress >= 100) {
           clearInterval(interval);
-          checkFormCompletion();
           return { ...prev, [fieldName]: 100 };
         }
         return { ...prev, [fieldName]: newProgress };
       });
-    }, 50); // Faster upload simulation
+    }, 100);
   };
 
-  const checkFormCompletion = () => {
-    const requiredFields = [
-      'fullName', 'fatherName', 'motherName', 'dateOfBirth', 
-      'mobileNumber', 'email', 'address', 'currentStatus', 
-      'documentNumber'
-    ];
-    
-    const requiredFiles = ['photo', 'identityDocument', 'educationalCertificate'];
-    
-    const fieldsComplete = requiredFields.every(field => formData[field as keyof typeof formData]);
-    const filesComplete = requiredFiles.every(field => formData[field as keyof typeof formData]);
-    const uploadsComplete = requiredFiles.every(field => uploadProgress[field as keyof typeof uploadProgress] === 100);
-    
-    setCanSubmit(fieldsComplete && filesComplete && uploadsComplete);
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, files } = e.target;
+    if (files && files[0]) {
+      const originalFile = files[0];
+
+      // Check if file is already used for another field
+      const otherFields = ['photo', 'identityDocument', 'educationalCertificate'].filter(f => f !== name);
+      const isDuplicate = otherFields.some(f => {
+        const file = formData[f as keyof typeof formData] as File | null;
+        return file && file.name === originalFile.name && file.lastModified === originalFile.lastModified;
+      });
+
+      if (isDuplicate) {
+        toast({
+          title: "Duplicate File",
+          description: "You cannot upload the same file for multiple fields. Please choose a different file.",
+          variant: "destructive",
+        });
+        e.target.value = '';
+        return;
+      }
+
+      // Compress image if it's an image file
+      const processedFile = originalFile.type.startsWith('image/') 
+        ? await compressImage(originalFile)
+        : originalFile;
+
+      setFormData(prev => ({ ...prev, [name]: processedFile }));
+      simulateImageUpload(name, processedFile);
+    }
   };
 
   const getUserIP = async (): Promise<string> => {
@@ -179,6 +213,8 @@ React.useEffect(() => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    console.log('Submit attempt:', { canSubmit, isSubmitting });
     
     if (!canSubmit) {
       toast({
@@ -654,62 +690,5 @@ React.useEffect(() => {
     </section>
   );
 };
-// ...keep all your imports and code above
 
-const checkFormCompletion = () => {
-  const requiredFields = [
-    'fullName', 'fatherName', 'motherName', 'dateOfBirth',
-    'mobileNumber', 'email', 'address', 'currentStatus',
-    'documentNumber'
-  ];
-
-  const requiredFiles = ['photo', 'identityDocument', 'educationalCertificate'];
-
-  const fieldsComplete = requiredFields.every(field => formData[field as keyof typeof formData]);
-  const filesComplete = requiredFiles.every(field => formData[field as keyof typeof formData]);
-  const uploadsComplete = requiredFiles.every(field => uploadProgress[field as keyof typeof uploadProgress] === 100);
-
-  // New: Check that the three files are unique (not the same file object)
-  const fileObjs = requiredFiles.map(field => formData[field as keyof typeof formData]) as (File | null)[];
-  let filesAreUnique = true;
-  // Only check uniqueness if all files are present
-  if (fileObjs.every(Boolean)) {
-    const fileIds = fileObjs.map(file => file ? `${file.name}_${file.lastModified}` : '');
-    filesAreUnique = new Set(fileIds).size === fileIds.length;
-  }
-
-  setCanSubmit(fieldsComplete && filesComplete && uploadsComplete && filesAreUnique);
-};
-
-// Optionally, if you want to show a toast if files are not unique:
-const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-  const { name, files } = e.target;
-  if (files && files[0]) {
-    const originalFile = files[0];
-
-    // Compress image if it's an image file
-    const processedFile = originalFile.type.startsWith('image/') 
-      ? await compressImage(originalFile)
-      : originalFile;
-
-    // Check if file is already used for another field
-    const otherFields = ['photo', 'identityDocument', 'educationalCertificate'].filter(f => f !== name);
-    const isDuplicate = otherFields.some(f => {
-      const file = formData[f as keyof typeof formData] as File | null;
-      return file && file.name === processedFile.name && file.lastModified === processedFile.lastModified;
-    });
-
-    if (isDuplicate) {
-      toast({
-        title: "Duplicate File",
-        description: "You cannot upload the same file for multiple fields. Please choose a different file.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setFormData(prev => ({ ...prev, [name]: processedFile }));
-    simulateImageUpload(name, processedFile);
-  }
-};
 export default ApplicationForm;

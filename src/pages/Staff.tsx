@@ -66,22 +66,22 @@ const Staff = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900">
       <Header />
-      <main className="flex-grow py-16 bg-gray-50">
+      <main className="flex-grow py-16 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">
+            <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
               Our Faculty & Staff
             </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Meet our dedicated team of professionals committed to providing quality education and support
             </p>
           </div>
 
           <div className="space-y-8">
             {staffMembers.map((member, index) => (
-              <Card key={index} className="max-w-6xl mx-auto hover:shadow-lg transition-shadow">
+              <Card key={index} className="max-w-6xl mx-auto hover:shadow-lg transition-shadow bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardContent className="p-8">
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div className="text-center lg:text-left">
@@ -90,22 +90,22 @@ const Staff = () => {
                         alt={member.name}
                         className="w-48 h-48 rounded-lg object-cover mx-auto lg:mx-0 mb-4"
                       />
-                      <h2 className="text-2xl font-bold text-gray-800 mb-2">{member.name}</h2>
-                      <p className="text-lg text-green-600 font-semibold mb-4">{member.position}</p>
+                      <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">{member.name}</h2>
+                      <p className="text-lg text-green-600 dark:text-green-400 font-semibold mb-4">{member.position}</p>
                     </div>
                     
                     <div className="lg:col-span-2">
                       <div className="mb-6">
-                        <h3 className="text-lg font-semibold text-gray-800 mb-3">About</h3>
-                        <p className="text-gray-600 leading-relaxed">{member.experience}</p>
+                        <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">About</h3>
+                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{member.experience}</p>
                       </div>
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <h3 className="text-lg font-semibold text-gray-800 mb-3">Qualifications</h3>
+                          <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">Qualifications</h3>
                           <ul className="space-y-2">
                             {member.qualifications.map((qual, qualIndex) => (
-                              <li key={qualIndex} className="flex items-center text-gray-600">
+                              <li key={qualIndex} className="flex items-center text-gray-600 dark:text-gray-300">
                                 <span className="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
                                 {qual}
                               </li>
@@ -114,10 +114,10 @@ const Staff = () => {
                         </div>
                         
                         <div>
-                          <h3 className="text-lg font-semibold text-gray-800 mb-3">Areas of Expertise</h3>
+                          <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">Areas of Expertise</h3>
                           <ul className="space-y-2">
                             {member.expertise.map((skill, skillIndex) => (
-                              <li key={skillIndex} className="flex items-center text-gray-600">
+                              <li key={skillIndex} className="flex items-center text-gray-600 dark:text-gray-300">
                                 <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
                                 {skill}
                               </li>
@@ -132,12 +132,12 @@ const Staff = () => {
             ))}
           </div>
 
-          <Card className="max-w-4xl mx-auto mt-12">
+          <Card className="max-w-4xl mx-auto mt-12 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
             <CardHeader>
-              <CardTitle className="text-2xl text-center text-gray-800">Our Commitment</CardTitle>
+              <CardTitle className="text-2xl text-center text-gray-800 dark:text-white">Our Commitment</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                 Our team is dedicated to providing the highest quality education and support to help our students 
                 succeed in their careers. With a perfect blend of theoretical knowledge and practical experience, 
                 we ensure that each student receives personalized attention and guidance throughout their learning journey.
