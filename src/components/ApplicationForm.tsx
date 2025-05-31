@@ -31,11 +31,29 @@ const ApplicationForm = () => {
   const [canSubmit, setCanSubmit] = useState(false);
   const { toast } = useToast();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    checkFormCompletion();
-  };
+const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const { name, value } = e.target;
+  setFormData(prev => ({ ...prev, [name]: value }));
+  // remove: checkFormCompletion();
+};
+
+const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { name, files } = e.target;
+  if (files && files[0]) {
+    const originalFile = files[0];
+    const processedFile = originalFile.type.startsWith('image/') 
+      ? await compressImage(originalFile)
+      : originalFile;
+    setFormData(prev => ({ ...prev, [name]: processedFile }));
+    simulateImageUpload(name, processedFile);
+    // remove: checkFormCompletion();
+  }
+};
+
+// Add this useEffect at the top-level of your component:
+React.useEffect(() => {
+  checkFormCompletion();
+}, [formData, uploadProgress]);
 
   const compressImage = (file: File): Promise<File> => {
     return new Promise((resolve) => {
