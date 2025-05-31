@@ -83,19 +83,21 @@ const ApplicationForm = () => {
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, files } = e.target;
-    if (files && files[0]) {
-      const originalFile = files[0];
+  const { name, files } = e.target;
+
+  if (files && files[0]) {
+    e.target.value = ''; // 👈 এই লাইনটা এখানে ঢুকা
+
+    const originalFile = files[0];
+    const processedFile = originalFile.type.startsWith('image/')
+      ? await compressImage(originalFile)
+      : originalFile;
       
-      // Compress image if it's an image file
-      const processedFile = originalFile.type.startsWith('image/') 
-        ? await compressImage(originalFile)
-        : originalFile;
-      
-      setFormData(prev => ({ ...prev, [name]: processedFile }));
-      simulateImageUpload(name, processedFile);
-    }
-  };
+    setFormData(prev => ({ ...prev, [name]: processedFile }));
+    simulateImageUpload(name, processedFile);
+  }
+};
+
 
   const simulateImageUpload = (fieldName: string, file: File) => {
     setUploadProgress(prev => ({ ...prev, [fieldName]: 0 }));
