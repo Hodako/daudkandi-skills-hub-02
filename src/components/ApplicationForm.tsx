@@ -82,21 +82,25 @@ const ApplicationForm = () => {
     });
   };
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
   const { name, files } = e.target;
 
-  if (files && files[0]) {
-    e.target.value = ''; // 👈 এই লাইনটা এখানে ঢুকা
-
+  if (files && files.length > 0) {
     const originalFile = files[0];
-    const processedFile = originalFile.type.startsWith('image/')
+    
+    // Force re-upload by resetting input value
+    e.target.value = ''; // 👈 this resets the input
+
+    // Compress if it's an image
+    const processedFile = originalFile.type.startsWith('image/') 
       ? await compressImage(originalFile)
       : originalFile;
-      
+
     setFormData(prev => ({ ...prev, [name]: processedFile }));
     simulateImageUpload(name, processedFile);
   }
 };
+
 
 
   const simulateImageUpload = (fieldName: string, file: File) => {
