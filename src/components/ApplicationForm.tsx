@@ -87,19 +87,23 @@ const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 
   if (files && files.length > 0) {
     const originalFile = files[0];
-    
-    // Force re-upload by resetting input value
-    e.target.value = ''; // 👈 this resets the input
 
     // Compress if it's an image
-    const processedFile = originalFile.type.startsWith('image/') 
+    const processedFile = originalFile.type.startsWith('image/')
       ? await compressImage(originalFile)
       : originalFile;
 
+    // Set the file in state
     setFormData(prev => ({ ...prev, [name]: processedFile }));
+
+    // Simulate upload
     simulateImageUpload(name, processedFile);
+
+    // 🛠️ এখন input রিসেট কর
+    e.target.value = '';
   }
 };
+
 
 
 
