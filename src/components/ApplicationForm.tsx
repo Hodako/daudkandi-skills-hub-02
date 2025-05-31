@@ -636,5 +636,62 @@ const ApplicationForm = () => {
     </section>
   );
 };
+// ...keep all your imports and code above
 
+const checkFormCompletion = () => {
+  const requiredFields = [
+    'fullName', 'fatherName', 'motherName', 'dateOfBirth',
+    'mobileNumber', 'email', 'address', 'currentStatus',
+    'documentNumber'
+  ];
+
+  const requiredFiles = ['photo', 'identityDocument', 'educationalCertificate'];
+
+  const fieldsComplete = requiredFields.every(field => formData[field as keyof typeof formData]);
+  const filesComplete = requiredFiles.every(field => formData[field as keyof typeof formData]);
+  const uploadsComplete = requiredFiles.every(field => uploadProgress[field as keyof typeof uploadProgress] === 100);
+
+  // New: Check that the three files are unique (not the same file object)
+  const fileObjs = requiredFiles.map(field => formData[field as keyof typeof formData]) as (File | null)[];
+  let filesAreUnique = true;
+  // Only check uniqueness if all files are present
+  if (fileObjs.every(Boolean)) {
+    const fileIds = fileObjs.map(file => file ? `${file.name}_${file.lastModified}` : '');
+    filesAreUnique = new Set(fileIds).size === fileIds.length;
+  }
+
+  setCanSubmit(fieldsComplete && filesComplete && uploadsComplete && filesAreUnique);
+};
+
+// Optionally, if you want to show a toast if files are not unique:
+const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { name, files } = e.target;
+  if (files && files[0]) {
+    const originalFile = files[0];
+
+    // Compress image if it's an image file
+    const processedFile = originalFile.type.startsWith('image/') 
+      ? await compressImage(originalFile)
+      : originalFile;
+
+    // Check if file is already used for another field
+    const otherFields = ['photo', 'identityDocument', 'educationalCertificate'].filter(f => f !== name);
+    const isDuplicate = otherFields.some(f => {
+      const file = formData[f as keyof typeof formData] as File | null;
+      return file && file.name === processedFile.name && file.lastModified === processedFile.lastModified;
+    });
+
+    if (isDuplicate) {
+      toast({
+        title: "Duplicate File",
+        description: "You cannot upload the same file for multiple fields. Please choose a different file.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setFormData(prev => ({ ...prev, [name]: processedFile }));
+    simulateImageUpload(name, processedFile);
+  }
+};
 export default ApplicationForm;
