@@ -44,7 +44,7 @@ const NSDAPortal = () => {
                 <div className="text-center">
                   <div className="bg-gray-100 p-6 rounded-lg mb-6">
                     <img 
-                      src="https://nsda.gov.bd/assets/images/logo.png" 
+                      src="https://upload.wikimedia.org/wikipedia/en/3/37/National_Skills_Development_Authority_logo.png" 
                       alt="NSDA Logo" 
                       className="h-20 w-20 mx-auto mb-4"
                     />
