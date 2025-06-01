@@ -48,7 +48,7 @@ const HeroSection = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="hidden sm:flex border-2 border-white text-white hover:bg-white hover:text-green-700 font-semibold px-6 py-3 text-sm sm:text-base glass-effect hover-lift font-roboto w-full sm:w-auto ml-4"
+                className="hidden sm:flex border-2 border-white text-green-600 bg-white hover:bg-green-50 hover:text-green-700 font-semibold px-6 py-3 text-sm sm:text-base glass-effect hover-lift font-roboto w-full sm:w-auto ml-4"
                 onClick={() => window.open('https://nsda.gov.bd', '_blank')}
               >
                 <i className="fas fa-external-link-alt mr-2"></i>

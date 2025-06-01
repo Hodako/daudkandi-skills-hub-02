@@ -3,6 +3,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import CampusSlideshow from '@/components/CampusSlideshow';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const About = () => {
@@ -22,7 +23,7 @@ const About = () => {
         <Header />
         <main className="flex-grow py-16 bg-gray-50 dark:bg-gray-900">
           <div className="container mx-auto px-4">
-            {/* Campus Image Slider */}
+            {/* Hero Section with animated background */}
             <div className="mb-12 overflow-hidden rounded-lg shadow-lg">
               <div className="relative h-64 sm:h-80 lg:h-96">
                 <div className="absolute inset-0 bg-gradient-to-r from-green-600/80 to-blue-600/80 z-10"></div>
@@ -53,7 +54,7 @@ const About = () => {
               </p>
             </div>
 
-            <div className="max-w-4xl mx-auto space-y-8">
+            <div className="max-w-4xl mx-auto space-y-8 mb-16">
               <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardHeader className="bg-green-600 text-white rounded-t-lg">
                   <CardTitle className="text-2xl">Our Mission</CardTitle>
@@ -148,6 +149,9 @@ const About = () => {
                 </CardContent>
               </Card>
             </div>
+
+            {/* Campus Slideshow */}
+            <CampusSlideshow />
           </div>
         </main>
         <Footer />
