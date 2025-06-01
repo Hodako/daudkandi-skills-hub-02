@@ -16,12 +16,12 @@ const ThemeToggle = () => {
     >
       <div className="relative mr-2 transition-transform duration-500 ease-in-out">
         {actualTheme === 'dark' ? (
-          <Moon className="h-4 w-4 rotate-0 scale-100 transition-all duration-500" />
+          <Moon className="h-5 w-5 text-gray-600 dark:text-gray-300" />
         ) : (
-          <Sun className="h-4 w-4 rotate-0 scale-100 transition-all duration-500 animate-pulse" />
+          <Sun className="h-5 w-5 text-gray-600 animate-pulse" />
         )}
       </div>
-      <span className="transition-opacity duration-300">
+      <span className="text-sm transition-opacity duration-300">
         {actualTheme === 'dark' ? 'Dark' : 'Light'}
       </span>
     </Button>

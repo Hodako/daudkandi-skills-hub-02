@@ -6,14 +6,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const EnhancedNSDAPortal = () => {
   return (
-    <section className="py-16 bg-gradient-to-br from-green-50 to-blue-50">
+    <section className="py-16 bg-gradient-to-br from-green-50 to-blue-50 dark:from-gray-800 dark:to-gray-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 fade-in-up">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-4">
             <i className="fas fa-globe mr-3 text-green-600"></i>
             NSDA Online Portal
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Access official NSDA services, resources, and training programs through our integrated portal
           </p>
         </div>
@@ -28,39 +28,39 @@ const EnhancedNSDAPortal = () => {
 
             <TabsContent value="services" className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <Card className="glass-effect hover-lift">
+                <Card className="glass-effect hover-lift bg-white dark:bg-gray-800">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-lg flex items-center text-green-700">
+                    <CardTitle className="text-lg flex items-center text-green-700 dark:text-green-400">
                       <i className="fas fa-user-graduate mr-3"></i>
                       Online Registration
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600 text-sm">Register for courses and training programs directly through the NSDA portal</p>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">Register for courses and training programs directly through the NSDA portal</p>
                   </CardContent>
                 </Card>
 
-                <Card className="glass-effect hover-lift">
+                <Card className="glass-effect hover-lift bg-white dark:bg-gray-800">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-lg flex items-center text-blue-700">
+                    <CardTitle className="text-lg flex items-center text-blue-700 dark:text-blue-400">
                       <i className="fas fa-certificate mr-3"></i>
                       Digital Certificates
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600 text-sm">Download and verify your training certificates online</p>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">Download and verify your training certificates online</p>
                   </CardContent>
                 </Card>
 
-                <Card className="glass-effect hover-lift">
+                <Card className="glass-effect hover-lift bg-white dark:bg-gray-800">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-lg flex items-center text-purple-700">
+                    <CardTitle className="text-lg flex items-center text-purple-700 dark:text-purple-400">
                       <i className="fas fa-chart-line mr-3"></i>
                       Progress Tracking
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600 text-sm">Monitor your learning progress and course completion status</p>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">Monitor your learning progress and course completion status</p>
                   </CardContent>
                 </Card>
               </div>
@@ -68,12 +68,12 @@ const EnhancedNSDAPortal = () => {
 
             <TabsContent value="resources" className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card className="glass-effect">
+                <Card className="glass-effect bg-white dark:bg-gray-800">
                   <CardHeader>
-                    <CardTitle className="text-xl text-gray-800">Learning Materials</CardTitle>
+                    <CardTitle className="text-xl text-gray-800 dark:text-white">Learning Materials</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-3 text-gray-600">
+                    <ul className="space-y-3 text-gray-600 dark:text-gray-300">
                       <li className="flex items-center">
                         <i className="fas fa-book text-green-500 mr-3"></i>
                         Course handbooks and guides
@@ -94,12 +94,12 @@ const EnhancedNSDAPortal = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="glass-effect">
+                <Card className="glass-effect bg-white dark:bg-gray-800">
                   <CardHeader>
-                    <CardTitle className="text-xl text-gray-800">Support Services</CardTitle>
+                    <CardTitle className="text-xl text-gray-800 dark:text-white">Support Services</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-3 text-gray-600">
+                    <ul className="space-y-3 text-gray-600 dark:text-gray-300">
                       <li className="flex items-center">
                         <i className="fas fa-headset text-green-500 mr-3"></i>
                         24/7 Technical support
@@ -123,7 +123,7 @@ const EnhancedNSDAPortal = () => {
             </TabsContent>
 
             <TabsContent value="portal" className="space-y-6">
-              <Card className="glass-effect">
+              <Card className="glass-effect bg-white dark:bg-gray-800">
                 <CardHeader className="bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-t-lg">
                   <CardTitle className="text-2xl flex items-center">
                     <i className="fas fa-external-link-alt mr-3"></i>
@@ -133,21 +133,21 @@ const EnhancedNSDAPortal = () => {
                 <CardContent className="p-8">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                     <div>
-                      <div className="bg-gray-100 p-6 rounded-lg mb-6 text-center">
+                      <div className="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg mb-6 text-center">
                         <img 
                           src="https://upload.wikimedia.org/wikipedia/en/3/37/National_Skills_Development_Authority_logo.png" 
                           alt="NSDA Logo" 
                           className="h-16 w-16 sm:h-20 sm:w-20 mx-auto mb-4"
                         />
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-600 dark:text-gray-300">
                           National Skills Development Authority
                         </p>
-                        <p className="text-xs text-gray-500 mt-2">
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
                           Government of Bangladesh
                         </p>
                       </div>
                       
-                      <div className="text-center space-y-2 text-sm text-gray-600">
+                      <div className="text-center space-y-2 text-sm text-gray-600 dark:text-gray-300">
                         <p><i className="fas fa-clock mr-2"></i>Available 24/7</p>
                         <p><i className="fas fa-shield-alt mr-2"></i>Secure Access</p>
                         <p><i className="fas fa-mobile-alt mr-2"></i>Mobile Friendly</p>
@@ -157,7 +157,7 @@ const EnhancedNSDAPortal = () => {
                     <div className="space-y-4">
                       <Button 
                         size="lg" 
-                        className="w-full bg-black hover:bg-gray-800 text-white font-semibold py-4 text-lg pulse-glow"
+                        className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 text-lg pulse-glow"
                         onClick={() => window.open('https://nsda.gov.bd', '_blank')}
                       >
                         <i className="fas fa-external-link-alt mr-3"></i>
@@ -167,7 +167,7 @@ const EnhancedNSDAPortal = () => {
                       <Button 
                         size="lg" 
                         variant="outline" 
-                        className="w-full border-green-600 text-green-600 hover:bg-green-50 font-semibold py-4 text-lg"
+                        className="w-full border-green-600 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 font-semibold py-4 text-lg"
                         onClick={() => window.open('https://nsda.gov.bd/training-centers', '_blank')}
                       >
                         <i className="fas fa-building mr-3"></i>
@@ -177,7 +177,7 @@ const EnhancedNSDAPortal = () => {
                       <Button 
                         size="lg" 
                         variant="outline" 
-                        className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold py-4 text-lg"
+                        className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 font-semibold py-4 text-lg"
                         onClick={() => window.open('https://nsda.gov.bd/courses', '_blank')}
                       >
                         <i className="fas fa-graduation-cap mr-3"></i>
