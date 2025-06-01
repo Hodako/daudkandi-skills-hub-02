@@ -135,7 +135,7 @@ const EnhancedNSDAPortal = () => {
                     <div>
                       <div className="bg-gray-100 p-6 rounded-lg mb-6 text-center">
                         <img 
-                          src="https://nsda.gov.bd/assets/images/logo.png" 
+                          src="https://upload.wikimedia.org/wikipedia/en/3/37/National_Skills_Development_Authority_logo.png" 
                           alt="NSDA Logo" 
                           className="h-16 w-16 sm:h-20 sm:w-20 mx-auto mb-4"
                         />
